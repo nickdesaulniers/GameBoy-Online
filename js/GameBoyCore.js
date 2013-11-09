@@ -5178,8 +5178,7 @@ GameBoyCore.prototype.audioUnderrunAdjustment = function () {
 		if (typeof underrunAmount == "number") {
 			underrunAmount = this.bufferContainAmount - Math.max(underrunAmount, 0);
 			if (underrunAmount > 0) {
-				this.CPUCyclesTotalCurrent += (underrunAmount >> 1) * this.audioResamplerFirstPassFactor;
-				this.recalculateIterationClockLimit();
+				this.recalculateIterationClockLimitForAudio((underrunAmount >> 1) * this.audioResamplerFirstPassFactor);
 			}
 		}
 	}
@@ -5852,6 +5851,9 @@ GameBoyCore.prototype.recalculateIterationClockLimit = function () {
 	var endModulus = this.CPUCyclesTotalCurrent % 4;
 	this.CPUCyclesTotal = this.CPUCyclesTotalBase + this.CPUCyclesTotalCurrent - endModulus;
 	this.CPUCyclesTotalCurrent = endModulus;
+}
+GameBoyCore.prototype.recalculateIterationClockLimitForAudio = function (audioClocking) {
+	this.CPUCyclesTotal += Math.min((audioClocking >> 2) << 2, this.CPUCyclesTotalBase << 1);
 }
 GameBoyCore.prototype.scanLineMode2 = function () {	//OAM Search Period
 	if (this.STATTracker != 1) {

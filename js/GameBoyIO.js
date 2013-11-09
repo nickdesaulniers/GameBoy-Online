@@ -8,8 +8,8 @@ var settings = [						//Some settings.
 	1,									//Volume level set.
 	true,								//Colorize GB mode?
 	false,								//Disallow typed arrays?
-	16,									//Interval for the emulator loop.
-	4,									//Audio buffer minimum span amount over x interpreter iterations.
+	6,									//Interval for the emulator loop.
+	16,									//Audio buffer minimum span amount over x interpreter iterations.
 	20,									//Audio buffer maximum span amount over x interpreter iterations.
 	false,								//Override to allow for MBC1 instead of ROM only (compatibility for broken 3rd-party cartridges).
 	false,								//Override MBC RAM disabling and always allow reading and writing to the banks.
